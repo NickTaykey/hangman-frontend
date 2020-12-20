@@ -1,4 +1,4 @@
-import '../styles/App.css';
+import '../styles/compileds/App.css';
 import Hangman from './Hangman';
 
 const App = () => (

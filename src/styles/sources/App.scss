@@ -4,7 +4,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background: url("../images/background.jpg");
+	background: url("../../images/background.jpg");
 	background-position: center center;
 	overflow: hidden;
 }
@@ -12,7 +12,6 @@
 @media screen and (max-width: 576px) {
 	.App {
 		background-attachment: fixed;
-		background-repeat: no-repeat;
 		background-position: center center;
 	}
 }
