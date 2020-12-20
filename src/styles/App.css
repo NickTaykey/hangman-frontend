@@ -7,3 +7,12 @@
 	background: url("../images/background.jpg");
 	background-position: center center;
 }
+
+@media screen and (max-width: 576px) {
+	.App {
+		background-attachment: fixed;
+		background-repeat: no-repeat;
+		background-position: center center;
+		overflow: hidden;
+	}
+}
