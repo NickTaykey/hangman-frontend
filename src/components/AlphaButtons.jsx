@@ -1,70 +1,31 @@
 import React, { Component } from 'react';
+import { lettersArray } from '../data/helpers';
 
 class AlphaButtons extends Component {
-	constructor (props) {
-		super(props);
-		this.handleGuess = this.handleGuess.bind(this);
-	}
-	static defaultProps = {
-		letters : [
-			'a',
-			'b',
-			'c',
-			'd',
-			'e',
-			'f',
-			'g',
-			'h',
-			'i',
-			'j',
-			'k',
-			'l',
-			'm',
-			'n',
-			'o',
-			'p',
-			'q',
-			'r',
-			's',
-			't',
-			'u',
-			'v',
-			'w',
-			'x',
-			'y',
-			'z'
-		]
+	handleGuess = e => {
+		const { value } = e.target;
+		this.props.guess(value);
 	};
-	getOffsetLetters () {
-		let { offset, letters } = this.props;
-		offset = offset.toLowerCase();
-		let [
-			l1,
-			l2
-		] = offset.split('-');
-		let idx1 = letters.indexOf(l1);
-		let idx2 = letters.indexOf(l2) + 1;
-		return letters.slice(idx1, idx2);
-	}
-	handleGuess (evt) {
-		let ltr = evt.target.value;
-		this.props.guess(ltr);
-	}
+
 	generateButtons () {
-		const btns = this.getOffsetLetters().map(ltr => (
+		const { btnClassName, isDisabled, offset } = this.props;
+		let letters = lettersArray(offset);
+		let btns = letters.map(l => (
 			<button
-				key={ltr}
-				className={this.props.btnClassName}
-				value={ltr}
+				key={l}
+				className={btnClassName}
+				value={l}
 				onClick={this.handleGuess}
-				disabled={this.props.isDisabled(ltr)}>
-				{ltr}
+				disabled={isDisabled(l)}>
+				{l}
 			</button>
 		));
 		return btns;
 	}
+
 	render () {
-		return <p className="Hangman-btns">{this.generateButtons()}</p>;
+		let btns = this.generateButtons();
+		return <p className="Hangman-btns">{btns}</p>;
 	}
 }
 
