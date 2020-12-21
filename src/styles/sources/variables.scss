@@ -1,5 +1,20 @@
 @import "https://fonts.googleapis.com/css?family=Coming+Soon";
 
+// palettes
+
+$colors: (
+	black: #50514f,
+	red: #f25f5c,
+	yellow: #ffe066,
+	blue: #247ba0,
+	green: #70c1b3,
+	white-1: #fff,
+	white-2: #e9ecef,
+	grey-1: #6c757d,
+	grey-2: #495057,
+	grey-3: #9e9e9e
+);
+
 // breakpoints
 
 $w-breakpoints: (small: 576px);
@@ -7,16 +22,26 @@ $h-breakpoints: (small: 700px, medium: 812px);
 
 // colors
 
-$color-white: #fff;
-$color-black: #000;
-$btn-colors: (
-	color: #fff,
-	disabled-color: #eeeeee,
-	disabled-background: #bdbdbd,
-	disabled-shadow: #9e9e9e
+$color-white: map-get($map: $colors, $key: white-1);
+$color-black: map-get($map: $colors, $key: black);
+
+$disabled-btn-colors: (
+	color: map-get($map: $colors, $key: white-1),
+	background: map-get($map: $colors, $key: grey-3),
+	shadow: map-get($map: $colors, $key: grey-2)
 );
-$letter-btn-colors: (background: #ffc107, shadow: #ff9800);
-$restart-btn-colors: (background: #29bf12, shadow: #38b000);
+
+$letter-btn-colors: (
+	background: map-get($map: $colors, $key: yellow),
+	shadow: map-get($map: $colors, $key: red),
+	color: map-get($map: $colors, $key: black)
+);
+
+$restart-btn-colors: (
+	background: map-get($map: $colors, $key: green),
+	shadow: map-get($map: $colors, $key: blue),
+	color: map-get($map: $colors, $key: white-2)
+);
 
 // images
 
