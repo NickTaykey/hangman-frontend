@@ -1,0 +1,27 @@
+@import "https://fonts.googleapis.com/css?family=Coming+Soon";
+
+// breakpoints
+
+$w-breakpoints: (small: 576px);
+$h-breakpoints: (small: 700px, medium: 812px);
+
+// colors
+
+$color-white: #fff;
+$color-black: #000;
+$btn-colors: (
+	color: #fff,
+	disabled-color: #eeeeee,
+	disabled-background: #bdbdbd,
+	disabled-shadow: #9e9e9e
+);
+$letter-btn-colors: (background: #ffc107, shadow: #ff9800);
+$restart-btn-colors: (background: #29bf12, shadow: #38b000);
+
+// images
+
+$background-image-url: "../../images/background.jpg";
+
+// fonts
+
+$fonts: (familiy: "Coming Soon");

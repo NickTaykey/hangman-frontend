@@ -59,6 +59,7 @@ class Hangman extends Component {
 		let displayRestartBtn = nWrong === maxWrong || hasWin();
 		let hangmanImageSrc = images[nWrong];
 		let hangmanImageAlt = `${nWrong}/${maxWrong} wrong guesses`;
+		let hangmanImageStyle = { filter: 'none' };
 		let content, word;
 
 		if (!hasWin()) {
@@ -74,6 +75,7 @@ class Hangman extends Component {
 				word = guessedWord();
 			} else {
 				content = <p className="Hangman-label">YOU LOSE!</p>;
+				hangmanImageStyle.filter = 'grayscale(1)';
 				word = answer;
 			}
 		} else {
@@ -83,7 +85,11 @@ class Hangman extends Component {
 		return (
 			<div className="Hangman">
 				<h1>Hangman</h1>
-				<img src={hangmanImageSrc} alt={hangmanImageAlt} />
+				<img
+					src={hangmanImageSrc}
+					alt={hangmanImageAlt}
+					style={hangmanImageStyle}
+				/>
 				<p className="Hangman-nWrong">Number wrong: {nWrong}</p>
 				<p className="Hangman-word">{word}</p>
 				{content}

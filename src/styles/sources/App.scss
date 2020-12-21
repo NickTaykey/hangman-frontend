@@ -1,15 +1,17 @@
+@import 'variables';
+
 .App {
 	text-align: center;
 	height: 100vh;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background: url("../../images/background.jpg");
+	background: url($background-image-url);
 	background-position: center center;
 	overflow: hidden;
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: map-get($map: $w-breakpoints, $key: small)) {
 	.App {
 		background-attachment: fixed;
 		background-position: center center;
