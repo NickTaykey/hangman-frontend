@@ -17,3 +17,14 @@
 		background-position: center center;
 	}
 }
+
+$l-min: map-get($map: $w-breakpoints, $key: landscape-min);
+$l-max: map-get($map: $w-breakpoints, $key: landscape-max);
+$t-default: map-get($map: $h-breakpoints, $key: tablet-default);
+
+@media screen and (max-height: $t-default) and (min-width: $l-min) and (max-width: $l-max) {
+	.App {
+		overflow: scroll;
+		height: 120vw;
+	}
+}
