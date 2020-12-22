@@ -83,6 +83,7 @@
 		color: map-get($map: $disabled-btn-colors, $key: color);
 		border-radius: 5px;
 		padding-top: 4px;
+		transition: $standard-btn-transition;
 	}
 
 	.Hangman-letter-btn {
@@ -94,6 +95,7 @@
 	}
 
 	.Hangman-letter-btn:hover {
+		color: map-get($map: $letter-btn-colors, $key: color-hover);
 		background-color: map-get($map: $letter-btn-colors, $key: shadow);
 	}
 
@@ -113,5 +115,6 @@
 
 	.Hangman-restart-btn:hover {
 		background-color: map-get($map: $restart-btn-colors, $key: shadow);
+		color: map-get($map: $restart-btn-colors, $key: color-hover);
 	}
 }

@@ -34,13 +34,15 @@ $disabled-btn-colors: (
 $letter-btn-colors: (
 	background: map-get($map: $colors, $key: yellow),
 	shadow: map-get($map: $colors, $key: red),
-	color: map-get($map: $colors, $key: black)
+	color: map-get($map: $colors, $key: black),
+	color-hover: map-get($map: $colors, $key: white-1)
 );
 
 $restart-btn-colors: (
 	background: map-get($map: $colors, $key: green),
 	shadow: map-get($map: $colors, $key: blue),
-	color: map-get($map: $colors, $key: white-2)
+	color: map-get($map: $colors, $key: grey-2),
+	color-hover: map-get($map: $colors, $key: white-2)
 );
 
 // images
@@ -50,3 +52,7 @@ $background-image-url: "../../images/background.jpg";
 // fonts
 
 $fonts: (familiy: "Coming Soon");
+
+// animations
+
+$standard-btn-transition: all 250ms 50ms linear;
