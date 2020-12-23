@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../styles/compileds/Hangman.css';
+import '../styles/compileds/Hangman.min.css';
 import img0 from '../images/hangman-0.jpg';
 import img1 from '../images/hangman-1.jpg';
 import img2 from '../images/hangman-2.jpg';

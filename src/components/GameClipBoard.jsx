@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../styles/compileds/GameClipBoard.css';
+import '../styles/compileds/GameClipBoard.min.css';
 
 class GameClipBoard extends Component {
 	state = { copyBtnText: 'CLICK COPY!' };
