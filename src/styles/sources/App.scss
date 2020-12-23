@@ -26,6 +26,13 @@ $t-default: map-get($h-breakpoints, tablet-default);
 @media screen and (max-height: $t-default) and (min-width: $l-min) and (max-width: $l-max) {
 	.App {
 		overflow: scroll;
-		height: 120vw;
+		height: 140vw;
+	}
+}
+
+@media screen and (min-height: 767px) and (max-height: 770px) {
+	.App {
+		zoom: 0.75;
+		height: 133vh;
 	}
 }

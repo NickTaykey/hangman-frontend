@@ -2,10 +2,24 @@
 @import "buttons";
 
 .GameClipBoard {
+	h1 {
+		display: none;
+	}
 	button {
-		@include success-button(100%);
+		@include success-button(350px);
 	}
 	button:hover {
 		@extend %success-button-hover;
+	}
+}
+
+@media screen and (min-width: 1024px) {
+	.GameClipBoard {
+		h1 {
+			display: block;
+		}
+		button {
+			width: 100%;
+		}
 	}
 }

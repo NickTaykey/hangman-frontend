@@ -5,7 +5,7 @@ import NewGame from './NewGame';
 
 const App = () => (
 	<div className="App">
-		<NavLink exact to="/games/new">
+		<NavLink exact to="/games/new" activeStyle={{ color: '#495057' }}>
 			New Game
 		</NavLink>
 		<Switch>
