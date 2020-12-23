@@ -1,4 +1,4 @@
-import '../styles/compileds/App.css';
+import '../styles/compileds/App.min.css';
 import { Switch, Route, NavLink } from 'react-router-dom';
 import Hangman from './Hangman';
 import NewGame from './NewGame';

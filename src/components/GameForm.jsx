@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../styles/compileds/GameForm.css';
+import '../styles/compileds/GameForm.min.css';
 import { createGame } from '../helpers/api';
 
 class GameForm extends Component {
