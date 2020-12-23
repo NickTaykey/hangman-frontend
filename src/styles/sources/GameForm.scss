@@ -9,6 +9,12 @@
 		font-size: 2.5rem;
 	}
 
+	.GameForm-error-alert {
+		color: map-get($map: $colors, $key: red);
+		font-size: 1.25rem;
+		font-weight: bold;
+	}
+
 	.GameForm-input {
 		text-align: center;
 		display: block;
