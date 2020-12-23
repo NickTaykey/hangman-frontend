@@ -23,27 +23,27 @@ $h-breakpoints: (small: 700px, medium: 812px, tablet-default: 420px);
 // colors
 
 $body-backgound: #f3f4ee;
-$color-white: map-get($map: $colors, $key: white-1);
-$color-black: map-get($map: $colors, $key: black);
+$color-white: map-get($colors, white-1);
+$color-black: map-get($colors, black);
 
 $disabled-btn-colors: (
-	color: map-get($map: $colors, $key: white-1),
-	background: map-get($map: $colors, $key: grey-3),
-	shadow: map-get($map: $colors, $key: grey-2)
+	color: map-get($colors, white-1),
+	background: map-get($colors, grey-3),
+	shadow: map-get($colors, grey-2)
 );
 
 $letter-btn-colors: (
-	background: map-get($map: $colors, $key: yellow),
-	shadow: map-get($map: $colors, $key: red),
-	color: map-get($map: $colors, $key: black),
-	color-hover: map-get($map: $colors, $key: white-1)
+	background: map-get($colors, yellow),
+	shadow: map-get($colors, red),
+	color: map-get($colors, black),
+	color-hover: map-get($colors, white-1)
 );
 
-$restart-btn-colors: (
-	background: map-get($map: $colors, $key: green),
-	shadow: map-get($map: $colors, $key: blue),
-	color: map-get($map: $colors, $key: grey-2),
-	color-hover: map-get($map: $colors, $key: white-2)
+$success-btn-colors: (
+	background: map-get($colors, green),
+	shadow: map-get($colors, blue),
+	color: map-get($colors, grey-2),
+	color-hover: map-get($colors, white-2)
 );
 
 // images

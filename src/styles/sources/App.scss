@@ -1,9 +1,10 @@
-@import 'variables';
+@import "variables";
 
 .App {
 	text-align: center;
 	height: 100vh;
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	background: url($background-image-url);
@@ -11,16 +12,16 @@
 	overflow: hidden;
 }
 
-@media screen and (max-width: map-get($map: $w-breakpoints, $key: small)) {
+@media screen and (max-width: map-get($w-breakpoints, small)) {
 	.App {
 		background-attachment: fixed;
 		background-position: center center;
 	}
 }
 
-$l-min: map-get($map: $w-breakpoints, $key: landscape-min);
-$l-max: map-get($map: $w-breakpoints, $key: landscape-max);
-$t-default: map-get($map: $h-breakpoints, $key: tablet-default);
+$l-min: map-get($w-breakpoints, landscape-min);
+$l-max: map-get($w-breakpoints, landscape-max);
+$t-default: map-get($h-breakpoints, tablet-default);
 
 @media screen and (max-height: $t-default) and (min-width: $l-min) and (max-width: $l-max) {
 	.App {
