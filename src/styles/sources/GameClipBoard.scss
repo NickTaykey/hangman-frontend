@@ -1,0 +1,11 @@
+@import "variables";
+@import "buttons";
+
+.GameClipBoard {
+	button {
+		@include success-button(100%);
+	}
+	button:hover {
+		@extend %success-button:hover;
+	}
+}

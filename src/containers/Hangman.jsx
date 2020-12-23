@@ -120,7 +120,7 @@ class Hangman extends Component {
 						{content}
 						{displayRestartBtn && (
 							<button
-								className="Hangman-restart-btn"
+								className="Hangman-success-btn"
 								type="button"
 								onClick={handleRestart}>
 								Play again!
