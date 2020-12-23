@@ -22,7 +22,7 @@
 	box-shadow: 0 6px map-get($success-btn-colors, shadow);
 }
 
-%success-button:hover {
+%success-button-hover {
 	background-color: map-get($success-btn-colors, shadow);
 	color: map-get($success-btn-colors, color-hover);
 }
