@@ -7,7 +7,7 @@ const APP_URL = 'http://localhost:3000';
 class GameForm extends Component {
 	static defaultProps = {
 		defaultAttempts : 6,
-		maxAttemps      : 100,
+		maxAttempts     : 100,
 		minAttempts     : 1
 	};
 
@@ -21,19 +21,39 @@ class GameForm extends Component {
 		};
 	}
 
+	getValue (value) {
+		const { maxAttempts, minAttempts } = this.props;
+		if (value > maxAttempts) {
+			return maxAttempts;
+		} else if (value < minAttempts) {
+			return minAttempts;
+		} else {
+			return value;
+		}
+	}
+
+	updateFormState (field, value) {
+		this.setState(s => ({
+			...s,
+			form : { ...s.form, [field]: value }
+		}));
+	}
+
 	handleChange = e => {
 		e.preventDefault();
 		let { name, value } = e.target;
-		const { maxAttempts, minAttempts } = this.props;
+		let isAlphaRxp = new RegExp(/[a-z]+/gi);
 		value = name === 'attempts' ? +value : value;
-		value = name === 'word' ? value.toLowerCase() : value;
-		if (name === 'attempts' && (value < minAttempts || value > maxAttempts)) {
-			value = value > maxAttempts ? maxAttempts : minAttempts;
+		if (name === 'attempts') {
+			value = this.getValue(value);
+			this.updateFormState(name, value);
+		} else {
+			value = value.toLowerCase();
+			value = value.replace(/\s+/g, '');
+			if (!value.length || isAlphaRxp.test(value)) {
+				this.updateFormState(name, value);
+			}
 		}
-		this.setState(s => ({
-			...s,
-			form : { ...s.form, [name]: value }
-		}));
 	};
 
 	handleSubmit = async e => {
@@ -41,24 +61,14 @@ class GameForm extends Component {
 		const { defaultAttempts } = this.props;
 		const { word, attempts } = this.state.form;
 		if (!!word && attempts) {
-			let r = new RegExp(/\d/);
-			if (!r.test(word)) {
-				// valid form
-				let game = await createGame({ word, attempts });
-				this.setState({ gameLink: `${APP_URL}/${game._id}` });
-			} else {
-				this.setState(s => ({
-					...s,
-					error : `Invalid word!`,
-					form  : { ...s.form, word: '' }
-				}));
-			}
+			let game = await createGame({ word, attempts });
+			this.setState({ gameLink: `${APP_URL}/${game._id}` });
 		} else {
 			let fieldName = !word ? 'word' : 'attempts';
 			let fieldValue = !word ? '' : defaultAttempts;
 			this.setState(s => ({
 				...s,
-				error : `Invalid ${fieldName}!`,
+				error : `Missing ${fieldName}!`,
 				form  : { ...s.form, [fieldName]: fieldValue }
 			}));
 		}
