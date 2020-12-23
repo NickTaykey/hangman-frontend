@@ -8,15 +8,31 @@ import img4 from '../images/hangman-4.jpg';
 import img5 from '../images/hangman-5.jpg';
 import img6 from '../images/hangman-6.jpg';
 import { randomWord } from '../data/helpers';
+import { getGameInfo } from '../helpers/api';
 import AlphaButtons from '../components/AlphaButtons';
 
 class Hangman extends Component {
 	static defaultProps = {
-		maxWrong : 6,
-		images   : [ img0, img1, img2, img3, img4, img5, img6 ]
+		images : [ img0, img1, img2, img3, img4, img5, img6 ]
 	};
 
-	state = { answer: randomWord(), guessed: new Set(), nWrong: 0 };
+	state = {
+		answer   : '',
+		guessed  : new Set(),
+		nWrong   : 0,
+		maxWrong : null,
+		error    : null
+	};
+
+	async componentDidMount () {
+		const { id } = this.props.match.params;
+		try {
+			let { word, attempts } = await getGameInfo(id);
+			this.setState({ answer: word, maxWrong: attempts });
+		} catch (error) {
+			this.setState({ error });
+		}
+	}
 
 	guessedWord = () => {
 		const { answer, guessed } = this.state;
@@ -54,8 +70,8 @@ class Hangman extends Component {
 
 	render () {
 		const { guess, guessedWord, handleRestart, hasWin, isDisabled } = this;
-		const { images, maxWrong } = this.props;
-		const { answer, nWrong } = this.state;
+		const { images } = this.props;
+		const { answer, error, nWrong, maxWrong } = this.state;
 		let displayRestartBtn = nWrong === maxWrong || hasWin();
 		let hangmanImageSrc = images[nWrong];
 		let hangmanImageAlt = `${nWrong}/${maxWrong} wrong guesses`;
@@ -84,22 +100,33 @@ class Hangman extends Component {
 
 		return (
 			<div className="Hangman">
-				<h1>Hangman</h1>
-				<img
-					src={hangmanImageSrc}
-					alt={hangmanImageAlt}
-					style={hangmanImageStyle}
-				/>
-				<p className="Hangman-nWrong">Number wrong: {nWrong}</p>
-				<p className="Hangman-word">{word}</p>
-				{content}
-				{displayRestartBtn && (
-					<button
-						className="Hangman-restart-btn"
-						type="button"
-						onClick={handleRestart}>
-						Play again!
-					</button>
+				{error && (
+					<div className="Hangman-error">
+						<h1 className="Error-heading">404</h1>
+						<strong className="Error-message">Game not found</strong>
+						<pre className="Error-cause">Invalid Id</pre>
+					</div>
+				)}
+				{!error && (
+					<div className="Hangman-game">
+						<h1>Hangman</h1>
+						<img
+							src={hangmanImageSrc}
+							alt={hangmanImageAlt}
+							style={hangmanImageStyle}
+						/>
+						<p className="Hangman-nWrong">Number wrong: {nWrong}</p>
+						<p className="Hangman-word">{word}</p>
+						{content}
+						{displayRestartBtn && (
+							<button
+								className="Hangman-restart-btn"
+								type="button"
+								onClick={handleRestart}>
+								Play again!
+							</button>
+						)}
+					</div>
 				)}
 			</div>
 		);
