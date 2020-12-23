@@ -1,0 +1,28 @@
+@import "variables";
+
+%base-button {
+	border: none;
+	font-family: inherit;
+	cursor: pointer;
+	margin: 5px 2px 2px 2px;
+	letter-spacing: 1px;
+	outline: none;
+	color: map-get($map: $disabled-btn-colors, $key: color);
+	border-radius: 5px;
+	padding-top: 4px;
+	transition: $standard-btn-transition;
+}
+
+@mixin restart-button($width) {
+	@extend %base-button;
+	font-size: 1.5rem;
+	width: $width;
+	color: map-get($map: $restart-btn-colors, $key: color);
+	background-color: map-get($map: $restart-btn-colors, $key: background);
+	box-shadow: 0 6px map-get($map: $restart-btn-colors, $key: shadow);
+}
+
+%restart-button:hover {
+	background-color: map-get($map: $restart-btn-colors, $key: shadow);
+	color: map-get($map: $restart-btn-colors, $key: color-hover);
+}
