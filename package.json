@@ -6,6 +6,7 @@
 		"@testing-library/jest-dom": "^5.11.6",
 		"@testing-library/react": "^11.2.2",
 		"@testing-library/user-event": "^12.6.0",
+		"axios": "^0.21.1",
 		"react": "^17.0.1",
 		"react-dom": "^17.0.1",
 		"react-router": "^5.2.0",
@@ -21,10 +22,17 @@
 	},
 	"proxy": "http://localhost:8888/games",
 	"eslintConfig": {
-		"extends": [ "react-app", "react-app/jest" ]
+		"extends": [
+			"react-app",
+			"react-app/jest"
+		]
 	},
 	"browserslist": {
-		"production": [ ">0.2%", "not dead", "not op_mini all" ],
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
 		"development": [
 			"last 1 chrome version",
 			"last 1 firefox version",
