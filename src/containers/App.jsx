@@ -1,7 +1,7 @@
 import '../styles/compileds/App.css';
 import { Switch, Route, NavLink } from 'react-router-dom';
 import Hangman from './Hangman';
-import GameForm from '../components/GameForm';
+import NewGame from './NewGame';
 
 const App = () => (
 	<div className="App">
@@ -9,12 +9,9 @@ const App = () => (
 			New Game
 		</NavLink>
 		<Switch>
-			<Route exact path="/games/new" component={GameForm} />
-			<Route
-				exact
-				path="/games/:id"
-				component={props => <Hangman {...props} />}
-			/>
+			<Route path="/games/new" component={NewGame} />
+			<Route path="/games/:id" component={props => <Hangman {...props} />} />
+			<Route path="/*" component={NewGame} />
 		</Switch>
 	</div>
 );

@@ -10,7 +10,7 @@
 	}
 
 	.GameForm-error-alert {
-		color: map-get($map: $colors, $key: red);
+		color: map-get($colors, red);
 		font-size: 1.25rem;
 		font-weight: bold;
 	}
@@ -22,22 +22,22 @@
 		background: none;
 		border: none;
 		font-size: 2rem;
-		border-bottom: 4px solid map-get($map: $colors, $key: black);
+		border-bottom: 4px solid map-get($colors, black);
 		outline: none;
 		padding: 5px;
 		margin-top: 40px;
 		width: 98.2%;
-		color: map-get($map: $colors, $key: black);
-		font-family: map-get($map: $fonts, $key: familiy);
+		color: map-get($colors, black);
+		font-family: map-get($fonts, familiy);
 		font-weight: bold;
 	}
 
 	.GameForm-button {
-		@include restart-button(100%);
+		@include success-button(100%);
 		margin: 40px auto;
 	}
 
 	.GameForm-button:hover {
-		@extend %restart-button:hover;
+		@extend %success-button:hover;
 	}
 }
