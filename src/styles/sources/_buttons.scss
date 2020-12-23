@@ -1,0 +1,28 @@
+@import "variables";
+
+%base-button {
+	border: none;
+	font-family: inherit;
+	cursor: pointer;
+	margin: 5px 2px 2px 2px;
+	letter-spacing: 1px;
+	outline: none;
+	color: map-get($disabled-btn-colors, color);
+	border-radius: 5px;
+	padding-top: 4px;
+	transition: $standard-btn-transition;
+}
+
+@mixin success-button($width) {
+	@extend %base-button;
+	font-size: 1.5rem;
+	width: $width;
+	color: map-get($success-btn-colors, color);
+	background-color: map-get($success-btn-colors, background);
+	box-shadow: 0 6px map-get($success-btn-colors, shadow);
+}
+
+%success-button-hover {
+	background-color: map-get($success-btn-colors, shadow);
+	color: map-get($success-btn-colors, color-hover);
+}
