@@ -4,70 +4,59 @@ import { createGame } from '../helpers/api';
 
 class GameForm extends Component {
 	static defaultProps = {
-		defaultAttempts : 6,
-		maxAttempts     : 100,
-		minAttempts     : 1
+		maxAttempts : 100,
+		minAttempts : 6
 	};
 
 	constructor (props) {
 		super(props);
-		const { defaultAttempts } = this.props;
+		const { minAttempts } = this.props;
 		this.state = {
-			form  : { word: '', attempts: defaultAttempts },
+			form  : { word: '', attempts: minAttempts },
 			error : null
 		};
-	}
-
-	getValue (value) {
-		const { maxAttempts, minAttempts } = this.props;
-		if (value > maxAttempts) {
-			return maxAttempts;
-		} else if (value < minAttempts) {
-			return minAttempts;
-		} else {
-			return value;
-		}
-	}
-
-	updateFormState (field, value) {
-		this.setState(s => ({
-			...s,
-			form : { ...s.form, [field]: value }
-		}));
 	}
 
 	handleChange = e => {
 		e.preventDefault();
 		let { name, value } = e.target;
-		let isAlphaRxp = new RegExp(/[a-z]+/gi);
-		value = name === 'attempts' ? +value : value;
-		if (name === 'attempts') {
-			value = this.getValue(value);
-			this.updateFormState(name, value);
-		} else {
-			value = value.toLowerCase();
-			value = value.replace(/\s+/g, '');
-			if (!value.length || isAlphaRxp.test(value)) {
-				this.updateFormState(name, value);
-			}
-		}
+		this.setState(s => ({
+			...s,
+			form : { ...s.form, [name]: value }
+		}));
+	};
+
+	formValidationErrUpdate = (error, field, value) => {
+		this.setState(({ form, ...s }) => ({
+			...s,
+			form  : { ...form, [field]: value },
+			error
+		}));
 	};
 
 	handleSubmit = async e => {
 		e.preventDefault();
-		const { defaultAttempts, setGameLink } = this.props;
-		const { word, attempts } = this.state.form;
-		if (!!word && attempts) {
-			let { _id } = await createGame({ word, attempts });
-			setGameLink(_id);
+		const { maxAttempts, minAttempts, setGameLink } = this.props;
+		const { formValidationErrUpdate } = this;
+		let { word, attempts } = this.state.form;
+		let isAlphaRxp = new RegExp(/^[a-z]+$/);
+		if (!!word && !!attempts) {
+			attempts = +attempts;
+			if (!isAlphaRxp.test(word))
+				formValidationErrUpdate('Invalid word!', 'word', '');
+			else if (!attempts)
+				formValidationErrUpdate('Invalid attempts!', 'attempts', '6');
+			else if (attempts > maxAttempts)
+				formValidationErrUpdate('Max 100 attempts!', 'attempts', '6');
+			else if (attempts < minAttempts)
+				formValidationErrUpdate('Min 6 attempts!', 'attempts', '6');
+			else {
+				let { _id } = await createGame({ word, attempts });
+				setGameLink(_id);
+			}
 		} else {
 			let fieldName = !word ? 'word' : 'attempts';
-			let fieldValue = !word ? '' : defaultAttempts;
-			this.setState(s => ({
-				...s,
-				error : `Missing ${fieldName}!`,
-				form  : { ...s.form, [fieldName]: fieldValue }
-			}));
+			this.setState({ error: `Missing ${fieldName}!` });
 		}
 	};
 
@@ -87,7 +76,7 @@ class GameForm extends Component {
 				/>
 				<input
 					className="GameForm-input"
-					type="number"
+					type="text"
 					placeholder="Attempts"
 					name="attempts"
 					value={form.attempts}
