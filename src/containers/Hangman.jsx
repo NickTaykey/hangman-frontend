@@ -71,9 +71,10 @@ class Hangman extends Component {
 
 	handleRestart = () => {
 		this.setState({
-			answer  : randomWord(),
-			guessed : new Set(),
-			nWrong  : 0
+			answer     : randomWord(),
+			guessed    : new Set(),
+			nWrong     : 0,
+			imageIndex : 0
 		});
 	};
 
