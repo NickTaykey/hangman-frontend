@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import GameClipBoard from '../components/GameClipBoard';
 import GameForm from '../components/GameForm';
 
-const APP_URL = 'http://localhost:3000';
+const APP_URL = 'https://hanggame-backend.herokuapp.com';
 
 class NewGame extends Component {
 	state = { gameLink: null };
