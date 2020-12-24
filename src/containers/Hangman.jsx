@@ -17,11 +17,12 @@ class Hangman extends Component {
 	};
 
 	state = {
-		answer   : '',
-		guessed  : new Set(),
-		nWrong   : 0,
-		maxWrong : null,
-		error    : null
+		answer     : '',
+		guessed    : new Set(),
+		nWrong     : 0,
+		maxWrong   : null,
+		error      : null,
+		imageIndex : 0
 	};
 
 	async componentDidMount () {
@@ -42,10 +43,20 @@ class Hangman extends Component {
 	};
 
 	guess = l => {
-		this.setState(({ answer, guessed, nWrong }) => ({
-			guessed : guessed.add(l),
-			nWrong  : nWrong + (answer.includes(l) ? 0 : 1)
-		}));
+		let { answer, maxWrong, nWrong, imageIndex, guessed } = this.state;
+		const { images } = this.props;
+		const isLetterCorrect = answer.includes(l);
+		guessed.add(l);
+
+		if (!isLetterCorrect) {
+			nWrong++;
+			let updateFrequency = Math.round(maxWrong / (images.length - 1));
+			if (imageIndex < 5) {
+				if (nWrong >= updateFrequency && nWrong % updateFrequency === 0)
+					imageIndex++;
+			} else if (maxWrong === nWrong) imageIndex++;
+		}
+		this.setState({ guessed, nWrong, imageIndex });
 	};
 
 	hasWin = () => {
@@ -71,9 +82,9 @@ class Hangman extends Component {
 	render () {
 		const { guess, guessedWord, handleRestart, hasWin, isDisabled } = this;
 		const { images } = this.props;
-		const { answer, error, nWrong, maxWrong } = this.state;
+		let { answer, error, nWrong, maxWrong, imageIndex } = this.state;
 		let displayRestartBtn = nWrong === maxWrong || hasWin();
-		let hangmanImageSrc = images[nWrong];
+		let hangmanImageSrc = images[imageIndex];
 		let hangmanImageAlt = `${nWrong}/${maxWrong} wrong guesses`;
 		let hangmanImageStyle = { filter: 'none' };
 		let content, word;
