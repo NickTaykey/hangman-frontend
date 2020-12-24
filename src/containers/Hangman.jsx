@@ -7,7 +7,6 @@ import img3 from '../images/hangman-3.jpg';
 import img4 from '../images/hangman-4.jpg';
 import img5 from '../images/hangman-5.jpg';
 import img6 from '../images/hangman-6.jpg';
-import { randomWord } from '../data/helpers';
 import { getGameInfo } from '../helpers/api';
 import AlphaButtons from '../components/AlphaButtons';
 
@@ -70,12 +69,12 @@ class Hangman extends Component {
 	};
 
 	handleRestart = () => {
-		this.setState({
-			answer     : randomWord(),
+		this.setState(s => ({
+			...s,
 			guessed    : new Set(),
 			nWrong     : 0,
 			imageIndex : 0
-		});
+		}));
 	};
 
 	isDisabled = l => this.state.guessed.has(l);
